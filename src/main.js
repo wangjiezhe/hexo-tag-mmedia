@@ -6,6 +6,7 @@ const mmedia_config = hexo.config.mmedia;
 const loader_path =
   mmedia_config.loader_path || "/assets/mmedia/mmedia-loader.js";
 const injector_layout = mmedia_config.injector_layout || ["post"];
+const pjax = mmedia_config.pjax || false;
 
 // 复制js文件
 if (!loader_path.startsWith("http")) {
@@ -23,12 +24,12 @@ if (!loader_path.startsWith("http")) {
 injector_layout.forEach((e) => {
   hexo.extend.injector.register(
     "head_end",
-    `<script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script>`,
+    `<script${pjax ? ' data-pjax' : ''}> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script>`,
     e
   );
   hexo.extend.injector.register(
     "body_end",
-    `<script src="${loader_path}"></script>`,
+    `<script${pjax ? ' data-pjax' : ''} src="${loader_path}"></script>`,
     e
   );
 });
