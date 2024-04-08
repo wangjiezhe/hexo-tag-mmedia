@@ -24,7 +24,7 @@ if (!loader_path.startsWith("http")) {
 injector_layout.forEach((e) => {
   hexo.extend.injector.register(
     "head_end",
-    `<script${pjax ? ' data-pjax' : ''}> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script>`,
+    `<script${pjax ? ' data-pjax' : ''}> var HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script>`,
     e
   );
   hexo.extend.injector.register(
