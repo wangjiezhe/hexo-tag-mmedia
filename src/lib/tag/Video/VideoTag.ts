@@ -8,7 +8,7 @@ class VideoTag extends BaseTag {
 
   generate(): string {
     let video_data = merge(this.config.data, this.contents);
-    let video_config = `<video id="${this.tag_id}" ${this.parse(
+    let video_config = `<video${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}" ${this.parse(
       video_data
     )}></video>`;
     this.result += video_config;

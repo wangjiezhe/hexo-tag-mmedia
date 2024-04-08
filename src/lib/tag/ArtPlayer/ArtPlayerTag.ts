@@ -76,7 +76,7 @@ class ArtPlayerTag extends BaseTag {
     let data = this.config.data;
     let artplayer_options = utils.assign(this.art_parse(data), this.contents);
 
-    this.result += `<div id="${this.tag_id}" style="${artplayer_options.style}"></div>`;
+    this.result += `<div${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}" style="${artplayer_options.style}"></div>`;
 
     let artplayer_script = `var ${
       this.mmedia_id
@@ -93,7 +93,7 @@ class ArtPlayerTag extends BaseTag {
 
     artplayer_script += `HEXO_MMEDIA_DATA.js.push("${this.config.artplayer_js}");`;
     artplayer_script += `HEXO_MMEDIA_DATA.artPlayerData.push(${this.mmedia_id}_options);`;
-    this.result += `<script> ${artplayer_script} </script>`;
+    this.result += `<script${this.config.pjax ? ' data-pjax' : ''}> ${artplayer_script} </script>`;
     return this.result;
   }
 }

@@ -59,7 +59,7 @@ class AplayerTag extends BaseTag {
   }
 
   generate(): string {
-    this.result += `<div id="${this.tag_id}"></div>`;
+    this.result += `<div${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}"></div>`;
     let data = this.config.data;
     let aplayer_options = utils.assign({}, [
       data.contents,
@@ -80,7 +80,7 @@ class AplayerTag extends BaseTag {
     aplayer_script += `HEXO_MMEDIA_DATA.css.push("${this.config.aplayer_css}");`;
     aplayer_script += `HEXO_MMEDIA_DATA.js.push("${this.config.aplayer_js}");`;
     aplayer_script += `HEXO_MMEDIA_DATA.aplayerData.push(${this.mmedia_id}_options);`;
-    this.result += `<script> ${aplayer_script} </script>`;
+    this.result += `<script${this.config.pjax ? ' data-pjax' : ''}> ${aplayer_script} </script>`;
     return this.result;
   }
 }

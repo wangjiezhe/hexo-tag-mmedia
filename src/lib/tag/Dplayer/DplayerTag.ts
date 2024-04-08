@@ -85,12 +85,12 @@ class DplayerTag extends BaseTag {
   }
 
   generate(): string {
-    this.result += `<script src="${this.config.dplayer_js}"></script>`;
+    this.result += `<script${this.config.pjax ? ' data-pjax' : ''} src="${this.config.dplayer_js}"></script>`;
 
     let data = this.config.data;
     let dplayer_options = utils.assign(this.d_parse(data), this.contents);
 
-    this.result += `<div id="${this.tag_id}"></div>`;
+    this.result += `<div${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}"></div>`;
 
     let dplayer_script = `var ${
       this.mmedia_id
@@ -109,7 +109,7 @@ class DplayerTag extends BaseTag {
 
     dplayer_script += `HEXO_MMEDIA_DATA.js.push("${this.config.dplayer_js}");`;
     dplayer_script += `HEXO_MMEDIA_DATA.dplayerData.push(${this.mmedia_id}_options);`;
-    this.result += `<script> ${dplayer_script} </script>`;
+    this.result += `<script${this.config.pjax ? ' data-pjax' : ''}> ${dplayer_script} </script>`;
     return this.result;
   }
 }

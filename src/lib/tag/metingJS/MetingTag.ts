@@ -7,7 +7,7 @@ class MetingTag extends BaseTag {
   }
 
   generate(): string {
-    this.result += `<div id="${this.tag_id}"></div>`;
+    this.result += `<div${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}"></div>`;
 
     if (
       this.config.meting_api &&
@@ -15,7 +15,7 @@ class MetingTag extends BaseTag {
       this.config.meting_api != null
     ) {
       let apistr = `var meting_api='${this.config.meting_api}?server=:server&type=:type&id=:id&auth=:auth&r=:r';`;
-      this.result += `<script> ${apistr} </script>`;
+      this.result += `<script${this.config.pjax ? ' data-pjax' : ''}> ${apistr} </script>`;
     }
 
     let meting_data = {
@@ -35,7 +35,7 @@ class MetingTag extends BaseTag {
 
     meting_script += `HEXO_MMEDIA_DATA.metingData.push(${this.mmedia_id}_options);`;
 
-    this.result += `<script> ${meting_script} </script>`;
+    this.result += `<script${this.config.pjax ? ' data-pjax' : ''}> ${meting_script} </script>`;
 
     return this.result;
   }

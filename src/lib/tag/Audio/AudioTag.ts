@@ -8,7 +8,7 @@ class AudioTag extends BaseTag {
 
   generate(): string {
     let data = merge(this.config.data, this.contents);;
-    let audio_config = `<audio id="${this.tag_id}" ${this.parse(data)}></audio>`;
+    let audio_config = `<audio${this.config.pjax ? ' class="pjax"' : ''} id="${this.tag_id}" ${this.parse(data)}></audio>`;
     this.result += audio_config;
     return this.result;
   }
